@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,7 +98,7 @@ public class HomeController implements DisposableBean {
 	// return testingModel;
 	// }
 	@RequestMapping(value = "/start", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-	public String start(@RequestParam String partition, @RequestParam String theme, ModelMap model) {
+	public String start(@RequestParam String partition, @RequestParam String theme, Model model) {
 		Part p = hdao.getPartitionByName(partition);
 		themeCurrent = p.receiveTheme(theme);
 		questionCurrent = themeCurrent.getList().get(questionIndex - 1);
