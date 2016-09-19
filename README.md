@@ -1,1 +1,1 @@
-This project provide is a  service for education issues.
+This project provide a  service for education issues.
