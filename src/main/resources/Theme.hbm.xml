@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="by.dunaenergo.training.model.Theme" table="theme">
+        <id name="id" type="java.lang.Long">
+            <column name="theme_id" />
+            <generator class="increment" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="1000" />
+        </property>
+        <property name="list" type="java.util.ArrayList">
+            <column name="list" length="1000000"/>
+        </property>
+    </class>
+</hibernate-mapping>
