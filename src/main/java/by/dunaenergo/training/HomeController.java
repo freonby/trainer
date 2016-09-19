@@ -195,7 +195,7 @@ public class HomeController implements DisposableBean {
 	@RequestMapping(value = "/closeSession", method = RequestMethod.GET)
 	@ResponseBody
 	public void close(@RequestParam(required = false) String optionClose) {
-		System.out.println("ping server for session validating...");
+		System.out.println("Ping server for session validating...");
 	}
 
 }
