@@ -40,7 +40,7 @@ public class HomeController implements DisposableBean {
 	public ModelAndView home(HttpSession session) {
 		this.session = session;
 		ModelAndView model = new ModelAndView();
-		model.setViewName("home");
+		model.setViewName("mainPage");
 		model.addObject("sid", session.getId());
 		return model;
 

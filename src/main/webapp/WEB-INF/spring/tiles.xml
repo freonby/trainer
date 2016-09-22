@@ -7,7 +7,7 @@
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
 	</definition>
 
-	<definition name="home" extends="baseLayout">
+	<definition name="mainPage" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/mainPage.jsp" />
 	</definition>
 	<definition name="login" extends="baseLayout">
