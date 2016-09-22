@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="header.jsp" />
+
 
 <!-- Begin page content -->
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">
-
 			<form name='form_login' class="form-signin"
 				action="j_spring_security_check" method="POST">
 				<h3 class="form-signin-heading">Авторизация</h3>
@@ -39,10 +38,8 @@
 							pingSession();
 						</script>
 					</div>
-				</c:if>
-				
+				</c:if>				
 			</form>
-
 		</div>
 		<!-- /col-md-4 -->
 		<div class="col-md-8 bg_custom"></div>
@@ -52,4 +49,3 @@
 </div>
 <!-- /container -->
 
-<c:import url="footer.jsp" />
