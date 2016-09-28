@@ -43,7 +43,7 @@
 
 </head>
 
-<body>
+<body class="bg_custom">
 
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -56,7 +56,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="mainPage">ProGip.by</a>
+				<a class="navbar-brand" href="mainPage">Q-LAB.by</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">

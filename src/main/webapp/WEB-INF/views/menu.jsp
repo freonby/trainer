@@ -4,7 +4,7 @@
 
 
 <!-- Begin page content -->
-<div class="container bg_menu">
+<div class="container">
 
 	<form class="form-menu" action="start" method="GET">
 		<h4>Раздел:</h4>
@@ -21,6 +21,7 @@
 			тест</button>
 	</form>
 	<script type="text/javascript">
+		
 		$('#partition').select();
 	</script>
 </div>

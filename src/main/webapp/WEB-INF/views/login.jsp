@@ -6,16 +6,16 @@
 <!-- Begin page content -->
 <div class="container">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-12">
 			<form name='form_login' class="form-signin"
 				action="j_spring_security_check" method="POST">
-				<h3 class="form-signin-heading">Авторизация</h3>
+				<h4 class="form-signin-heading">Авторизация</h4>
 				<label for="inputEmail" class="sr-only">Логин</label> <input
 					id="inp" type="text" name="inputlogin"
-					class="form-control form-margin" placeholder="Ваш логин" required
+					class="form-control form-margin input-sm" placeholder="Ваш логин" required
 					autofocus> <label for="inputPassword" class="sr-only">Пароль</label>
 				<input type="password" name="inputPassword"
-					class="form-control form-margin" placeholder="Ваш пароль" required>
+					class="form-control form-margin  input-sm" placeholder="Ваш пароль" required>
 				<div class="checkbox">
 					<label> <input name="remember_me" type="checkbox">
 						Запомнить меня
@@ -41,9 +41,8 @@
 				</c:if>				
 			</form>
 		</div>
-		<!-- /col-md-4 -->
-		<div class="col-md-8 bg_custom"></div>
-		<!-- /col-md-8 -->
+		<!-- /col-md-12 -->
+		
 	</div>
 	<!-- /row -->
 </div>

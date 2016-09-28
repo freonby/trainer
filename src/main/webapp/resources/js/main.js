@@ -9,6 +9,17 @@ function pingSession(){
 	});
 	
 }
+function resetIndex(){
+	$.ajax({
+		url : 'reset',
+		data : ({
+			option : "true"
+
+		}),
+
+	});
+	
+}
 
 function doCheckPartitions() {
 	$.ajax({
@@ -26,17 +37,7 @@ function doCheckPartitions() {
 		}
 	});
 };
-$(window).unload(function() {
-	
-	$.ajax({
-		url : 'closeSession',
-		data : ({
-			optionClose : "close"
 
-		}),
-		
-	});
-});
 function doOnLoad() {
 
 	$.ajax({

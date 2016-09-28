@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,32 +82,36 @@ public class HomeController implements DisposableBean {
 		return jsonString;
 	}
 
+	@RequestMapping(value = "/start", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+	public ModelAndView start(@RequestParam String partition, @RequestParam String theme) {
+		Part p = hdao.getPartitionByName(partition);
+		System.out.println("Index=" + questionIndex);
+		questionIndex = 1;
+		themeCurrent = p.receiveTheme(theme);
+		questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+		questionCurrent.shuffle();
+		ModelAndView testingModel = new ModelAndView();
+		testingModel.setViewName("testing");
+		testingModel.addObject("partitionName", p.getName());
+		testingModel.addObject("themeName", themeCurrent.getName());
+		testingModel.addObject("countQuestions", themeCurrent.CountQuestions());
+
+		return testingModel;
+	}
 	// @RequestMapping(value = "/start", method = RequestMethod.GET, produces =
 	// "text/html;charset=UTF-8")
-	// public ModelAndView start(@RequestParam String partition, @RequestParam
-	// String theme) {
+	// public String start(@RequestParam String partition, @RequestParam String
+	// theme, Model model) {
 	// Part p = hdao.getPartitionByName(partition);
 	// themeCurrent = p.receiveTheme(theme);
 	// questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 	// questionCurrent.shuffle();
-	// testingModel.addObject("partitionName", p.getName());
-	// testingModel.addObject("themeName", themeCurrent.getName());
-	// testingModel.addObject("countQuestions", themeCurrent.CountQuestions());
+	// model.addAttribute("partitionName", p.getName());
+	// model.addAttribute("themeName", themeCurrent.getName());
+	// model.addAttribute("countQuestions", themeCurrent.CountQuestions());
 	//
-	// return testingModel;
+	// return "redirect:testing";
 	// }
-	@RequestMapping(value = "/start", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-	public String start(@RequestParam String partition, @RequestParam String theme, Model model) {
-		Part p = hdao.getPartitionByName(partition);
-		themeCurrent = p.receiveTheme(theme);
-		questionCurrent = themeCurrent.getList().get(questionIndex - 1);
-		questionCurrent.shuffle();
-		model.addAttribute("partitionName", p.getName());
-		model.addAttribute("themeName", themeCurrent.getName());
-		model.addAttribute("countQuestions", themeCurrent.CountQuestions());
-
-		return "redirect:testing";
-	}
 
 	@RequestMapping(value = "/check", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -196,6 +199,12 @@ public class HomeController implements DisposableBean {
 	@ResponseBody
 	public void close(@RequestParam(required = false) String optionClose) {
 		System.out.println("Ping server for session validating...");
+	}
+
+	@RequestMapping(value = "/reset", method = RequestMethod.GET)
+	@ResponseBody
+	public void reset(@RequestParam(required = false) String option) {
+
 	}
 
 }
