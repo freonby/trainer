@@ -76,22 +76,32 @@ public class HomeController implements DisposableBean {
 		Part p = hdao.getPartitionByName(option);
 		String jsonString = "";
 		Gson gson = new Gson();
-
 		jsonString = gson.toJson(p.themeList());
 
 		return jsonString;
 	}
 
-	@RequestMapping(value = "/start", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/start", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public ModelAndView start(@RequestParam String partition, @RequestParam String theme) {
 		Part p = hdao.getPartitionByName(partition);
-		System.out.println("Index=" + questionIndex);
 		questionIndex = 1;
+		if (theme.equals("Все разделы")) {
+			themeCurrent = new Theme("Все разделы", p.allQuestionList());
+			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+			ModelAndView testingModel = new ModelAndView();
+			testingModel.setViewName("konspekt");
+			testingModel.addObject("partitionName", p.getName());
+			testingModel.addObject("themeName", themeCurrent.getName());
+			testingModel.addObject("countQuestions", themeCurrent.CountQuestions());
+
+			return testingModel;
+
+		}
 		themeCurrent = p.receiveTheme(theme);
 		questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 		questionCurrent.shuffle();
 		ModelAndView testingModel = new ModelAndView();
-		testingModel.setViewName("testing");
+		testingModel.setViewName("konspekt");
 		testingModel.addObject("partitionName", p.getName());
 		testingModel.addObject("themeName", themeCurrent.getName());
 		testingModel.addObject("countQuestions", themeCurrent.CountQuestions());
@@ -201,10 +211,57 @@ public class HomeController implements DisposableBean {
 		System.out.println("Ping server for session validating...");
 	}
 
-	@RequestMapping(value = "/reset", method = RequestMethod.GET)
+	@RequestMapping(value = "/overview", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public void reset(@RequestParam(required = false) String option) {
+	public String overview(@RequestParam String param) {
+		Alert alert = null;
+		Result result = null;
+		String jsonString = "";
 
+		if (param.equals("start")) {
+			alert = new Alert("", "none", "", "");
+			if (themeCurrent == null)
+				return jsonString;
+			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+			result = new Result(questionIndex, questionCurrent, alert);
+			jsonString = result.konspektJson();
+			return jsonString;
+
+		}
+		if (param.equals("prev")) {
+			alert = new Alert("", "none", "", "");
+			questionIndex--;
+			if (questionIndex < 1) {
+				questionIndex = 1;
+				questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+				result = new Result(questionIndex, questionCurrent, alert);
+				jsonString = result.konspektJson();
+				return jsonString;
+			}
+			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+			result = new Result(questionIndex, questionCurrent, alert);
+			jsonString = result.konspektJson();
+			return jsonString;
+
+		}
+		if (param.equals("next")) {
+			alert = new Alert("", "none", "", "");
+			questionIndex++;
+			if (questionIndex > themeCurrent.CountQuestions()) {
+				alert = new Alert("alert alert-info", "block", "Вы просмотрели все доступные вопросы данного раздела!", "");
+				questionIndex--;
+				questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+				result = new Result(questionIndex, questionCurrent, alert);
+				jsonString = result.konspektJson();
+				return jsonString;
+			}
+			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+			result = new Result(questionIndex, questionCurrent, alert);
+			jsonString = result.konspektJson();
+			return jsonString;
+
+		}
+		return jsonString;
 	}
 
 }

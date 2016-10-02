@@ -12,8 +12,9 @@
 	<http use-expressions="true">
 
 
-		<intercept-url pattern="/menu" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/menu" access="hasRole('ROLE_ANONYMOUS')" />
 		<intercept-url pattern="/testing" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/konspekt" access="hasRole('ROLE_ANONYMOUS')" />
 		<form-login login-page="/login" default-target-url="/menu"
 			authentication-failure-url="/login?error=true" username-parameter="inputlogin"
 			password-parameter="inputPassword" />
@@ -23,10 +24,10 @@
 		<remember-me data-source-ref="dataSource"
 			remember-me-parameter="remember_me" />
 <!-- 			Session concurrency -->
-		<session-management invalid-session-url="/login">
-			<concurrency-control max-sessions="1"
-				error-if-maximum-exceeded="true" expired-url="/mainPage" />
-		</session-management>
+<!-- 		<session-management invalid-session-url="/login"> -->
+<!-- 			<concurrency-control max-sessions="1" -->
+<!-- 				error-if-maximum-exceeded="true" expired-url="/mainPage" /> -->
+<!-- 		</session-management> -->
 	</http>
 	<authentication-manager>
 		<authentication-provider>

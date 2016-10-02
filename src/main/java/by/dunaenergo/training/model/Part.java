@@ -44,7 +44,7 @@ public class Part implements Serializable {
 					return theme = list.get(i);
 			}
 		}
-		return null;
+		return theme;
 
 	}
 
@@ -68,10 +68,23 @@ public class Part implements Serializable {
 		ArrayList<String> listName = new ArrayList<String>();
 		if (list.isEmpty())
 			return null;
+		listName.add("Все разделы");
 		for (Theme theme : list) {
 			listName.add(theme.getName());
 		}
 		return listName;
+
+	}
+
+	public ArrayList<Question> allQuestionList() {
+		ArrayList<Question> qList = new ArrayList<Question>();
+		if (list.isEmpty())
+			return null;
+
+		for (Theme theme : list) {
+			qList.addAll(theme.getList());
+		}
+		return qList;
 
 	}
 

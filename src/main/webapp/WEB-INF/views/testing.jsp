@@ -10,7 +10,7 @@
 		<p class="lead">Вопросов: ${countQuestions}</p>
 	</div>
 	<div class="page-header">
-		<div class="panel panel-info">
+		<div class="panel panel-info fixed_heading">
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					Вопрос:<span id="questionIndex"></span>
@@ -26,7 +26,7 @@
 					<h3 class="panel-title">Выберите вариант ответа</h3>
 				</div>
 
-				<div id="pan" class="panel-body">
+				<div id="pan" class="panel-body fixed_panel">
 
 					<div class="radio">
 						<label><input id="radio1" type="radio"

@@ -19,6 +19,9 @@
 	<definition name="testing" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/testing.jsp" />
 	</definition>
+	<definition name="konspekt" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/konspekt.jsp" />
+	</definition>
 	<definition name="testresult" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/testresult.jsp" />
 	</definition>

@@ -9,17 +9,7 @@ function pingSession(){
 	});
 	
 }
-function resetIndex(){
-	$.ajax({
-		url : 'reset',
-		data : ({
-			option : "true"
 
-		}),
-
-	});
-	
-}
 
 function doCheckPartitions() {
 	$.ajax({
@@ -41,7 +31,7 @@ function doCheckPartitions() {
 function doOnLoad() {
 
 	$.ajax({
-		url : 'check',
+		url : 'overview',
 		data : ({
 			param : "start"
 
@@ -49,17 +39,14 @@ function doOnLoad() {
 		success : function(data) {
 			var json = JSON.parse(data);
 			$("#questionIndex").html(json[0]);
-			$("#question").html(json[1]);
-			for (var i = 1; i < 5; i++) {
-				$("#radio" + i).val(json[i + 1]);
-				$("#answ" + i).html(json[i + 1]);
-			}
+			$("#question").html(json[1]);	
+			$("#answ").html(json[2]);
 			$("#alert").removeClass();
-			$("#alert").addClass(json[6]);
-			$("#alert").css("display", json[7]);
-			$("#cause").html(json[8]);
-			$("#alertMessage").html(json[9]);
-			$("#description").html(json[10]);
+			$("#alert").addClass(json[3]);
+			$("#alert").css("display", json[4]);
+			$("#cause").html(json[5]);
+			$("#alertMessage").html(json[6]);
+			$("#description").html(json[7]);
 		}
 	});
 	
@@ -70,7 +57,7 @@ $(document).ready(function() {
 	$("#prev").click(function() {
 
 		$.ajax({
-			url : 'check',
+			url : 'overview',
 			data : ({
 				param : "prev"
 
@@ -78,26 +65,21 @@ $(document).ready(function() {
 			success : function(data) {
 				var json = JSON.parse(data);
 				$("#questionIndex").html(json[0]);
-				$("#question").html(json[1]);
-
-				for (var i = 1; i < 5; i++) {
-					$("#radio" + i).val(json[i + 1]);
-					$("#answ" + i).html(json[i + 1]);
-				}
+				$("#question").html(json[1]);	
+				$("#answ").html(json[2]);
 				$("#alert").removeClass();
-				$("#alert").addClass(json[6]);
-				$("#alert").css("display", json[7]);
-				$("#cause").html(json[8]);
-				$("#alertMessage").html(json[9]);
-				$("#description").html(json[10]);
-				$('input[name=optionsRadios]:checked').prop("checked", false);
+				$("#alert").addClass(json[3]);
+				$("#alert").css("display", json[4]);
+				$("#cause").html(json[5]);
+				$("#alertMessage").html(json[6]);
+				$("#description").html(json[7]);
 			}
 		});
 	});
 	$("#next").click(function() {
 
 		$.ajax({
-			url : 'check',
+			url : 'overview',
 			data : ({
 				param : "next"
 
@@ -105,19 +87,14 @@ $(document).ready(function() {
 			success : function(data) {
 				var json = JSON.parse(data);
 				$("#questionIndex").html(json[0]);
-				$("#question").html(json[1]);
-
-				for (var i = 1; i < 5; i++) {
-					$("#radio" + i).val(json[i + 1]);
-					$("#answ" + i).html(json[i + 1]);
-				}
+				$("#question").html(json[1]);	
+				$("#answ").html(json[2]);
 				$("#alert").removeClass();
-				$("#alert").addClass(json[6]);
-				$("#alert").css("display", json[7]);
-				$("#cause").html(json[8]);
-				$("#alertMessage").html(json[9]);
-				$("#description").html(json[10]);
-				$('input[name=optionsRadios]:checked').prop("checked", false);
+				$("#alert").addClass(json[3]);
+				$("#alert").css("display", json[4]);
+				$("#cause").html(json[5]);
+				$("#alertMessage").html(json[6]);
+				$("#description").html(json[7]);
 			}
 		});
 	});

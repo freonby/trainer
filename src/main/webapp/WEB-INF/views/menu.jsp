@@ -6,7 +6,7 @@
 <!-- Begin page content -->
 <div class="container">
 
-	<form class="form-menu" action="start" method="GET">
+	<form class="form-menu" action="start" method="POST">
 		<h4>Раздел:</h4>
 		<select id="partition" name="partition" class="form-control input-sm"
 			onselect="doCheckPartitions()" onchange="doCheckPartitions()">
@@ -17,8 +17,7 @@
 		<h4>Тема:</h4>
 		<select id="theme" name="theme" class="form-control input-sm">
 		</select>
-		<button class="btn btn-lg btn-success btn-block" type="submit">Начать
-			тест</button>
+		<button class="btn btn-lg btn-success btn-block" type="submit">Начать</button>
 	</form>
 	<script type="text/javascript">
 		

@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="resources/icons/favicon.ico">
-<title>Режим тестирования</title>
+<title>Q-lab</title>
 
 <!-- Bootstrap core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -60,8 +60,8 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<sec:authorize access="hasRole('ROLE_USER')">
-						<li class="active"><a href="menu">Темы</a></li>
+					<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+						<li class="active"><a href="menu">Выбрать раздел</a></li>
 					</sec:authorize>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -73,13 +73,11 @@
 						<li><a href="#">Личный кабинет</a></li>
 						<li><a href="logout">Выход<span
 								class="glyphicon glyphicon-log-out menu-margin-span"></span></a></li>
-						<script type="text/javascript">
-							setInterval(pingSession, 50000);
-						</script>
+						
 					</sec:authorize>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
-	<c:if test=""></c:if>
+	

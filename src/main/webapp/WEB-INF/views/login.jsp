@@ -15,7 +15,7 @@
 					class="form-control form-margin input-sm" placeholder="Ваш логин" required
 					autofocus> <label for="inputPassword" class="sr-only">Пароль</label>
 				<input type="password" name="inputPassword"
-					class="form-control form-margin  input-sm" placeholder="Ваш пароль" required>
+					class="form-control form-margin input-sm" placeholder="Ваш пароль" required>
 				<div class="checkbox">
 					<label> <input name="remember_me" type="checkbox">
 						Запомнить меня

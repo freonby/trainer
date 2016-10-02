@@ -49,4 +49,20 @@ public class Result {
 		return jsonString;
 	}
 
+	public String konspektJson() {
+		String jsonString = "";
+		ArrayList<String> list = new ArrayList<String>();
+		Gson gson = new Gson();
+		list.add(Integer.toString(questionIndex));
+		list.add(currentQuestion.getName());
+		list.add(currentQuestion.getValidAnswer().getName());
+		list.add(alert.getStyle());
+		list.add(alert.getDisplay());
+		list.add(alert.getCause());
+		list.add(alert.getAlertMessage());
+		list.add(currentQuestion.getDescription());
+		jsonString = gson.toJson(list);
+		return jsonString;
+	}
+
 }
