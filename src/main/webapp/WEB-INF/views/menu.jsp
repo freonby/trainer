@@ -6,7 +6,7 @@
 <!-- Begin page content -->
 <div class="container">
 
-	<form class="form-menu" action="start" method="POST">
+	<form class="form-menu" action="start" method="GET">
 		<h4>Раздел:</h4>
 		<select id="partition" name="partition" class="form-control input-sm"
 			onselect="doCheckPartitions()" onchange="doCheckPartitions()">
@@ -20,7 +20,6 @@
 		<button class="btn btn-lg btn-success btn-block" type="submit">Начать</button>
 	</form>
 	<script type="text/javascript">
-		
 		$('#partition').select();
 	</script>
 </div>

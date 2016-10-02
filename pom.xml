@@ -138,7 +138,7 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Apache Database Connection Pool -->
+		
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
