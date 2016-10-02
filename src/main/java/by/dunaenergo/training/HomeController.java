@@ -84,10 +84,8 @@ public class HomeController implements DisposableBean {
 	@RequestMapping(value = "/start", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	public ModelAndView start(@RequestParam String partition, @RequestParam String theme) {
 		Part p = hdao.getPartitionByName(partition);
-		System.out.println("ПРИШЛА ТЕМА:" + theme);
 		questionIndex = 1;
 		if (theme.equals("Все разделы")) {
-			System.out.println("Зашли в все разделы");
 			themeCurrent = new Theme("Все разделы", p.allQuestionList());
 			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 			ModelAndView testingModel = new ModelAndView();
@@ -100,7 +98,6 @@ public class HomeController implements DisposableBean {
 
 		}
 		themeCurrent = p.receiveTheme(theme);
-		System.out.println("Получаем тему:" + themeCurrent.getName());
 		questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 		questionCurrent.shuffle();
 		ModelAndView testingModel = new ModelAndView();
