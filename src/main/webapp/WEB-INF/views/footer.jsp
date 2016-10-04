@@ -4,7 +4,7 @@
 <footer class="footer">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-2  form-margin">
+			<div class="col-md-2 col-xs-4  form-margin">
 			<!-- Yandex.Metrika informer -->
 <a href="https://metrika.yandex.ru/stat/?id=39987240&amp;from=informer"
 target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/39987240/3_0_E0D4ABFF_C0B48BFF_1_pageviews"
@@ -39,10 +39,8 @@ style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" tit
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/39987240" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-			
-			
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-10 col-xs-8">
 				<p class="text-muted text-center">
 					&copy;2016 <strong>Q-lab</strong> <span class="e-mail">qlabinbox@gmail.com</span>
 				</p>

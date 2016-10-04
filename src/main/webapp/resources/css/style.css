@@ -17,11 +17,11 @@ body {
 }
 .fixed_heading{
 	
-	min-height: 120px;
+	min-height: 160px;
 }
 .fixed_panel{
 	
-	min-height: 120px;
+	min-height: 130px;
 }
 .wrapper {
 	
@@ -118,7 +118,9 @@ body {
 	width: 100%;
 	/* Set the fixed height of the footer here */
 	height: 60px;
-	background-color: #f5f5f5;
+	
+	background-color:rgba(192,180,139, 0.3);
+	
 }
 
 /* Custom page CSS
@@ -139,7 +141,7 @@ body>.container {
 }
 
 .bg_custom {
-	background-image: url(../images/bg_1922.jpg);
+	background-image: url(../images/bg_1923.jpg);
 	background-position: center;
 	background-repeat: no-repeat;
 	height: auto;
