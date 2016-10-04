@@ -9,11 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Вопросы и ответы для аттестации проектировщиков в Минске">
+<meta name="description" content="Вопросы и ответы для аттестации ГИП, Главспец, Главный инженер, Прораб в Беларуси">
 <meta name="author" content="Q-lab">
 <meta name="yandex-verification" content="69be0d4201bbb0e7" />
 <link rel="icon" href="resources/icons/favicon.ico">
-<title>Q-lab</title>
+<title>Q-lab: Эффективные программы</title>
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="resources/css/ie10-viewport-bug-workaround.css"
@@ -45,7 +45,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="mainPage">Q-LAB.by</a>
+				<a class="navbar-brand" href="http://q-lab.by">Q-lab</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
