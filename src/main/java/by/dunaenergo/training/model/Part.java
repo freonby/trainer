@@ -82,6 +82,7 @@ public class Part implements Serializable {
 			return null;
 
 		for (Theme theme : list) {
+			theme.fillDescription();
 			qList.addAll(theme.getList());
 		}
 		return qList;

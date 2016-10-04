@@ -31,6 +31,16 @@ public class Theme implements Serializable {
 		this.list = new ArrayList<Question>();
 	}
 
+	public void fillDescription() {
+		ArrayList<Question> newList = new ArrayList<Question>();
+		for (Question question : list) {
+			String descr = this.getName() + "(" + question.getDescription() + ")";
+			question.setDescription(descr);
+			newList.add(question);
+		}
+		this.list = newList;
+	}
+
 	public void shuffle() {
 		Collections.shuffle(list);
 	}
