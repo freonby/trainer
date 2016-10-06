@@ -26,18 +26,13 @@ import by.dunaenergo.training.model.Theme;
 public class HomeController implements DisposableBean {
 	@Autowired
 	private UserDAO hdao;
-
 	@Autowired
 	private ModelAndView menuModel;
-	private Theme themeCurrent;
-	private Question questionCurrent;
-	private int questionIndex = 1;
-
-	private HttpSession session;
 
 	@RequestMapping(value = { "/", "/mainPage" }, method = RequestMethod.GET)
 	public ModelAndView home(HttpSession session) {
-		this.session = session;
+		int questionIndex = 1;
+		session.setAttribute("questionIndex", questionIndex);
 		ModelAndView model = new ModelAndView();
 		model.setViewName("mainPage");
 		model.addObject("sid", session.getId());
@@ -60,9 +55,10 @@ public class HomeController implements DisposableBean {
 	}
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
-	public ModelAndView menu() {
+	public ModelAndView menu(HttpSession session) {
 
-		questionIndex = 1;
+		int questionIndex = 1;
+		session.setAttribute("questionIndex", questionIndex);
 		ArrayList<Part> plist = (ArrayList<Part>) hdao.list();
 		menuModel.addObject("partitionList", plist);
 
@@ -71,8 +67,9 @@ public class HomeController implements DisposableBean {
 
 	@RequestMapping(value = "/checkoption", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String checkOption(@RequestParam String option) {
-		questionIndex = 1;
+	public String checkOption(@RequestParam String option, HttpSession session) {
+		int questionIndex = 1;
+		session.setAttribute("questionIndex", questionIndex);
 		Part p = hdao.getPartitionByName(option);
 		String jsonString = "";
 		Gson gson = new Gson();
@@ -82,12 +79,13 @@ public class HomeController implements DisposableBean {
 	}
 
 	@RequestMapping(value = "/start", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
-	public ModelAndView start(@RequestParam String partition, @RequestParam String theme) {
+	public ModelAndView start(@RequestParam String partition, @RequestParam String theme, HttpSession session) {
 		Part p = hdao.getPartitionByName(partition);
-		questionIndex = 1;
+		int questionIndex = 1;
 		if (theme.equals("Все разделы")) {
-			themeCurrent = new Theme("Все разделы", p.allQuestionList());
-			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+			Theme themeCurrent = new Theme("Все разделы", p.allQuestionList());
+			Question questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+			saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 			ModelAndView testingModel = new ModelAndView();
 			testingModel.setViewName("konspekt");
 			testingModel.addObject("partitionName", p.getName());
@@ -97,9 +95,10 @@ public class HomeController implements DisposableBean {
 			return testingModel;
 
 		}
-		themeCurrent = p.receiveTheme(theme);
-		questionCurrent = themeCurrent.getList().get(questionIndex - 1);
+		Theme themeCurrent = p.receiveTheme(theme);
+		Question questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 		questionCurrent.shuffle();
+		saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 		ModelAndView testingModel = new ModelAndView();
 		testingModel.setViewName("konspekt");
 		testingModel.addObject("partitionName", p.getName());
@@ -125,10 +124,13 @@ public class HomeController implements DisposableBean {
 
 	@RequestMapping(value = "/check", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String check(@RequestParam String param) {
+	public String check(@RequestParam String param, HttpSession session) {
 		Alert alert = null;
 		Result result = null;
 		String jsonString = "";
+		Theme themeCurrent = (Theme) session.getAttribute("themeCurrent");
+		Question questionCurrent = (Question) session.getAttribute("questionCurrent");
+		Integer questionIndex = (Integer) session.getAttribute("questionIndex");
 
 		if (param.equals("start")) {
 			alert = new Alert("", "none", "", "");
@@ -137,6 +139,7 @@ public class HomeController implements DisposableBean {
 			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 			result = new Result(questionIndex, questionCurrent, alert);
 			jsonString = result.toJsonString();
+			saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 			return jsonString;
 
 		}
@@ -148,11 +151,13 @@ public class HomeController implements DisposableBean {
 				questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 				result = new Result(questionIndex, questionCurrent, alert);
 				jsonString = result.toJsonString();
+				saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 				return jsonString;
 			}
 			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 			result = new Result(questionIndex, questionCurrent, alert);
 			jsonString = result.toJsonString();
+			saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 			return jsonString;
 
 		}
@@ -164,11 +169,13 @@ public class HomeController implements DisposableBean {
 				questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 				result = new Result(questionIndex, questionCurrent, alert);
 				jsonString = result.toJsonString();
+				saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 				return jsonString;
 			}
 			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 			result = new Result(questionIndex, questionCurrent, alert);
 			jsonString = result.toJsonString();
+			saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 			return jsonString;
 
 		}
@@ -181,6 +188,7 @@ public class HomeController implements DisposableBean {
 				questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 				alert = new Alert("alert alert-info", "block", "ТЕСТ ОКОНЧЕН.", "");
 				result = new Result(questionIndex, questionCurrent, alert);
+				saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 				jsonString = result.toJsonString();
 
 				return jsonString;
@@ -189,20 +197,20 @@ public class HomeController implements DisposableBean {
 			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 			result = new Result(questionIndex, questionCurrent, alert);
 			jsonString = result.toJsonString();
+			saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 			return jsonString;
 		}
 
 		alert = new Alert("alert alert-danger", "block", "НЕПРАВИЛЬНО!", "Правильный ответ: " + questionCurrent.getValidAnswer().getName());
 		result = new Result(questionIndex, questionCurrent, alert);
+		saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 		jsonString = result.toJsonString();
 		return jsonString;
 	}
 
 	@Override
 	public void destroy() throws Exception {
-		this.session.invalidate();
 
-		System.out.println("......DESTROY CONTROLLER.....");
 	}
 
 	@RequestMapping(value = "/closeSession", method = RequestMethod.GET)
@@ -213,10 +221,13 @@ public class HomeController implements DisposableBean {
 
 	@RequestMapping(value = "/overview", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String overview(@RequestParam String param) {
+	public String overview(@RequestParam String param, HttpSession session) {
 		Alert alert = null;
 		Result result = null;
 		String jsonString = "";
+		Theme themeCurrent = (Theme) session.getAttribute("themeCurrent");
+		Question questionCurrent = (Question) session.getAttribute("questionCurrent");
+		Integer questionIndex = (Integer) session.getAttribute("questionIndex");
 
 		if (param.equals("start")) {
 			alert = new Alert("", "none", "", "");
@@ -225,6 +236,7 @@ public class HomeController implements DisposableBean {
 			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 			result = new Result(questionIndex, questionCurrent, alert);
 			jsonString = result.konspektJson();
+			saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 			return jsonString;
 
 		}
@@ -236,11 +248,13 @@ public class HomeController implements DisposableBean {
 				questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 				result = new Result(questionIndex, questionCurrent, alert);
 				jsonString = result.konspektJson();
+				saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 				return jsonString;
 			}
 			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 			result = new Result(questionIndex, questionCurrent, alert);
 			jsonString = result.konspektJson();
+			saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 			return jsonString;
 
 		}
@@ -253,15 +267,24 @@ public class HomeController implements DisposableBean {
 				questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 				result = new Result(questionIndex, questionCurrent, alert);
 				jsonString = result.konspektJson();
+				saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 				return jsonString;
 			}
 			questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 			result = new Result(questionIndex, questionCurrent, alert);
 			jsonString = result.konspektJson();
+			saveParametersInSession(session, themeCurrent, questionCurrent, questionIndex);
 			return jsonString;
 
 		}
 		return jsonString;
+	}
+
+	public void saveParametersInSession(HttpSession session, Theme th, Question q, Integer index) {
+		session.setAttribute("themeCurrent", th);
+		session.setAttribute("questionCurrent", q);
+		session.setAttribute("questionIndex", index);
+
 	}
 
 }
