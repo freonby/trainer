@@ -46,11 +46,7 @@
       by.dunaenergo.training.listeners.RequestListenerImpl
     </listener-class>
 </listener>
-<listener>
-    <listener-class>
-      by.dunaenergo.training.listeners.SessionListenerImpl
-    </listener-class>
-</listener>
+
 
 	<!-- Processes application requests -->
 	<servlet>

@@ -1,10 +1,16 @@
 package by.dunaenergo.training;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 
-import org.springframework.beans.factory.DisposableBean;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +29,13 @@ import by.dunaenergo.training.model.Result;
 import by.dunaenergo.training.model.Theme;
 
 @Controller
-public class HomeController implements DisposableBean {
+@WebListener
+public class HomeController implements HttpSessionListener, ServletRequestListener {
 	@Autowired
 	private UserDAO hdao;
 	@Autowired
 	private ModelAndView menuModel;
+	private static final Logger log = Logger.getLogger(HomeController.class);
 
 	@RequestMapping(value = { "/", "/mainPage" }, method = RequestMethod.GET)
 	public ModelAndView home(HttpSession session) {
@@ -208,11 +216,6 @@ public class HomeController implements DisposableBean {
 		return jsonString;
 	}
 
-	@Override
-	public void destroy() throws Exception {
-
-	}
-
 	@RequestMapping(value = "/closeSession", method = RequestMethod.GET)
 	@ResponseBody
 	public void close(@RequestParam(required = false) String optionClose) {
@@ -284,6 +287,30 @@ public class HomeController implements DisposableBean {
 		session.setAttribute("themeCurrent", th);
 		session.setAttribute("questionCurrent", q);
 		session.setAttribute("questionIndex", index);
+
+	}
+
+	@Override
+	public void sessionCreated(HttpSessionEvent ev) {
+		Date d = new Date(ev.getSession().getCreationTime());
+
+		log.warn("session created time: " + d);
+
+	}
+
+	@Override
+	public void sessionDestroyed(HttpSessionEvent ev) {
+
+	}
+
+	@Override
+	public void requestDestroyed(ServletRequestEvent ev) {
+
+	}
+
+	@Override
+	public void requestInitialized(ServletRequestEvent ev) {
+		log.warn(" new request: " + ev.getServletRequest().getRemoteAddr());
 
 	}
 
