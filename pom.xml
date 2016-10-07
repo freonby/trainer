@@ -114,6 +114,7 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -138,7 +139,7 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

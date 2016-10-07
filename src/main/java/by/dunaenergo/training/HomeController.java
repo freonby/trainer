@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +34,8 @@ public class HomeController implements HttpSessionListener, ServletRequestListen
 	private UserDAO hdao;
 	@Autowired
 	private ModelAndView menuModel;
-	private static final Logger log = Logger.getLogger(HomeController.class);
+	// private static final Logger log =
+	// LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = { "/", "/mainPage" }, method = RequestMethod.GET)
 	public ModelAndView home(HttpSession session) {
@@ -294,7 +294,7 @@ public class HomeController implements HttpSessionListener, ServletRequestListen
 	public void sessionCreated(HttpSessionEvent ev) {
 		Date d = new Date(ev.getSession().getCreationTime());
 
-		log.warn("session created time: " + d);
+		System.out.println("session created time: " + d);
 
 	}
 
@@ -310,7 +310,7 @@ public class HomeController implements HttpSessionListener, ServletRequestListen
 
 	@Override
 	public void requestInitialized(ServletRequestEvent ev) {
-		log.warn(" new request: " + ev.getServletRequest().getRemoteAddr());
+		System.out.println(" new request: " + ev.getServletRequest().getRemoteAddr());
 
 	}
 
