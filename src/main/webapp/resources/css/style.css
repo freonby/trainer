@@ -18,6 +18,7 @@ body {
 .fixed_heading{
 	
 	min-height: 160px;
+	
 }
 .fixed_panel{
 	
@@ -38,15 +39,7 @@ body {
 /* 	margin: 0 auto; */
 	margin-top: 180px;
 	border: 1px solid rgba(0, 0, 0, 0.1);
-	/* 	-webkit-box-shadow: 0 10px 6px -6px #777; */
-	/* 	-moz-box-shadow: 0 10px 6px -6px #777; */
-	/* 	box-shadow: 0 10px 6px -6px #777; */
-	/* -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px
-		rgba(0, 0, 0, 0.1) inset;
-	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px
-		rgba(0, 0, 0, 0.1) inset;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1)
-		inset; */
+	
 }
 
 .form-signin .form-signin-heading, .form-menu .form-menu-heading,
@@ -67,6 +60,10 @@ body {
 	padding: 10px;
 	margin-bottom: 20px;
 	font-size: 14px;
+}
+.form-control select:hover{
+	background-color: #fff;
+	
 }
 
 .form-signin .form-control:focus {

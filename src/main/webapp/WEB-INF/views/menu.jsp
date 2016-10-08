@@ -8,16 +8,17 @@
 
 	<form class="form-menu" action="start" method="GET">
 		<h4>Раздел:</h4>
-		<select id="partition" name="partition" class="form-control input-sm"
+		<select id="partition" name="partition" class="form-control"
 			onselect="doCheckPartitions()" onchange="doCheckPartitions()">
 			<c:forEach var="partition" items="${partitionList}">
 				<option>${partition.name}</option>
+
 			</c:forEach>
 		</select>
 		<h4>Тема:</h4>
-		<select id="theme" name="theme" class="form-control input-sm">
+		<select id="theme" name="theme" class="form-control">
 		</select>
-		<button class="btn btn-lg btn-success btn-block" type="submit">Начать</button>
+		<button class="btn btn-lg btn-danger btn-block" type="submit">Начать</button>
 	</form>
 	<script type="text/javascript">
 		$('#partition').select();

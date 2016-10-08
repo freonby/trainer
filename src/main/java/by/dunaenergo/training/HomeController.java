@@ -43,7 +43,7 @@ public class HomeController implements HttpSessionListener, ServletRequestListen
 		session.setAttribute("questionIndex", questionIndex);
 		ModelAndView model = new ModelAndView();
 		model.setViewName("mainPage");
-		model.addObject("sid", session.getId());
+
 		return model;
 
 	}
@@ -265,7 +265,7 @@ public class HomeController implements HttpSessionListener, ServletRequestListen
 			alert = new Alert("", "none", "", "");
 			questionIndex++;
 			if (questionIndex > themeCurrent.CountQuestions()) {
-				alert = new Alert("alert alert-info", "block", "Вы просмотрели все доступные вопросы данного раздела!", "");
+				alert = new Alert("alert alert-success", "block", "Вы просмотрели все доступные вопросы данного раздела!", "");
 				questionIndex--;
 				questionCurrent = themeCurrent.getList().get(questionIndex - 1);
 				result = new Result(questionIndex, questionCurrent, alert);

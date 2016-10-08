@@ -9,12 +9,12 @@
 
 <div class="container wrapper">
 	<div class="page-header">
-		<h3>${partitionName}</h3>
-		<p class="lead">Раздел: ${themeName}</p>
+		<h3 class="text-warning">${partitionName}</h3>
+		<p class="lead text-warning">Раздел: ${themeName}</p>
 		<p class="lead">Вопросов: ${countQuestions}</p>
 	</div>
-	<div class="page-header">
-		<div class="panel panel-info fixed_heading">
+	<div>
+		<div class="panel panel-warning fixed_heading">
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					Вопрос:<span id="questionIndex"></span>
@@ -23,20 +23,12 @@
 			<div id="question" class="panel-body"></div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Ответ</h3>
-				</div>
-
-				<div id="pan" class="panel-body fixed_panel">
-
-					<p id="answ"></p>
-
-				</div>
-
-			</div>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title">Ответ</h3>
+		</div>
+		<div id="pan" class="panel-body fixed_panel">
+			<p id="answ"></p>
 		</div>
 	</div>
 	<script type="text/javascript">

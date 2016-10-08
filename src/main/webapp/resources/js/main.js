@@ -10,7 +10,6 @@ function pingSession(){
 	
 }
 
-
 function doCheckPartitions() {
 	$.ajax({
 		url : 'checkoption',
