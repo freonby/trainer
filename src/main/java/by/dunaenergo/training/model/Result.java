@@ -55,7 +55,18 @@ public class Result {
 		Gson gson = new Gson();
 		list.add(Integer.toString(questionIndex));
 		list.add(currentQuestion.getName());
-		list.add(currentQuestion.getValidAnswer().getName());
+		Answer validAnswer = currentQuestion.getValidAnswer();
+		if (validAnswer != null) {
+			list.add(currentQuestion.getValidAnswer().getName());
+			list.add(alert.getStyle());
+			list.add(alert.getDisplay());
+			list.add(alert.getCause());
+			list.add(alert.getAlertMessage());
+			list.add(currentQuestion.getDescription());
+			jsonString = gson.toJson(list);
+			return jsonString;
+		}
+		list.add("НЕТ ОТВЕТА");
 		list.add(alert.getStyle());
 		list.add(alert.getDisplay());
 		list.add(alert.getCause());

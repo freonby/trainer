@@ -8,6 +8,7 @@
 </script>
 
 <div class="container wrapper">
+
 	<div class="page-header">
 		<h3 class="text-warning">${partitionName}</h3>
 		<p class="lead text-warning">Раздел: ${themeName}</p>
